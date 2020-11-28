@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript課題③</title>
+</head>
+
+<body>
+  <h1>ToDoリスト</h1>
+  <div class="list-settings">
+    <input type="radio" name="status">すべて
+    <input type="radio" name="status">作業中
+    <input type="radio" name="status">完了
+    <table id="taskTable">
+      <tr>
+        <th>ID</th>
+        <th>コメント</th>
+        <th>状態</th>
+      </tr>
+    </table>
+
+    <h2>新規タスクの追加</h2>
+    <input type="text" id="taskComment">
+    <input type="button" id="addButton" value="追加">
+
+  </div>
+</body>
+
+<script>
+  const addButton = document.getElementById('addButton');
+  const taskTable = document.getElementById('taskTable');
+  let i = -1;
+  function idCountUp() {
+    i++;
+  };
+  function reset() {
+    const reset_target = document.getElementById('taskComment');
+    reset_target.value = '';
+  };
+  addButton.addEventListener('click', function () {
+    const tableRow = document.createElement('tr');
+    taskTable.appendChild(tableRow);
+    // IDの自動入力↓
+    const id = document.createElement('td');
+    idCountUp();
+    id.textContent = i;
+    tableRow.appendChild(id);
+
+    // コメント欄の表示↓
+    const comment = document.createElement('td');
+    const taskComment = document.getElementById('taskComment').value;
+    comment.textContent = taskComment;
+    tableRow.appendChild(comment);
+    // テキスト内容をクリア↓
+    reset();
+
+    // 状態のボタン表示↓
+    const status = document.createElement('td');
+    const statusButton = document.createElement('input');
+    statusButton.type = 'button';
+    statusButton.value = '作業中';
+    status.appendChild(statusButton);
+    tableRow.appendChild(status);
+    // 削除ボタン表示↓
+    const deleteArea = document.createElement('td');
+    const deleteButton = document.createElement('input');
+    deleteButton.type = 'button';
+    deleteButton.value = '削除';
+    deleteArea.appendChild(deleteButton);
+    tableRow.appendChild(deleteArea);
+
+  });
+
+
+</script>
+
+</html>
